@@ -131,7 +131,7 @@ RUN set -ex \
 
 #****************        PYTHON     *********************************************
 ENV PATH="/usr/local/bin:$PATH" \
-    GPG_KEY="E3FF2839C048B25C084DEBE9B26995E310250568" \
+    GPG_KEY="0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D" \
     PYTHON_PIP_VERSION="19.1.1" \
     LC_ALL=C.UTF-8 \
     LANG=C.UTF-8
