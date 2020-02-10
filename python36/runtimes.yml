@@ -1,8 +1,0 @@
-version: 0.1
-
-runtimes:
-  python:
-    versions:
-      3.6:
-        commands:
-          - echo "Installing Python version 3.6 ..."

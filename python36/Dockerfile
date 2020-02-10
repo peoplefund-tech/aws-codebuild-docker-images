@@ -91,8 +91,6 @@ VOLUME /var/lib/docker
 # Configure SSH
 COPY ssh_config /root/.ssh/config
 
-COPY runtimes.yml /codebuild/image/config/runtimes.yml
-
 COPY dockerd-entrypoint.sh /usr/local/bin/
 
 #****************        PYTHON     *********************************************
