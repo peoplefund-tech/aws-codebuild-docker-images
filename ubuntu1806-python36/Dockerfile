@@ -22,7 +22,6 @@ RUN set -ex \
     && apt-get update \
     && apt install -y apt-transport-https gnupg ca-certificates \
     && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-    && echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
     && apt-get update \
     && apt-get install software-properties-common -y --no-install-recommends \
     && apt-add-repository -y ppa:git-core/ppa \
@@ -49,7 +48,7 @@ RUN set -ex \
        libxml2-dev libxslt1-dev libyaml-dev make \
        patch xz-utils zlib1g-dev unzip curl \
        e2fsprogs iptables xfsprogs \
-       mono-devel less groff liberror-perl \
+       less groff liberror-perl \
        asciidoc build-essential bzr cvs cvsps docbook-xml docbook-xsl dpkg-dev \
        libdbd-sqlite3-perl libdbi-perl libdpkg-perl libhttp-date-perl \
        libio-pty-perl libserf-1-1 libsvn-perl libsvn1 libtcl8.6 libtimedate-perl \
@@ -157,19 +156,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && ln -s python3-config python-config \
         && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 #****************      END PYTHON     *********************************************
-
-RUN set -ex \
-   && apt-get install -y openssl \
-   && curl -o stunnel-5.55.tar.gz https://www.stunnel.org/downloads/stunnel-5.55.tar.gz \
-   && tar xvfz stunnel-5.55.tar.gz \
-   && cd stunnel-5.55 \
-   && ./configure \
-   && make \
-   && make install \
-   && openssl genrsa -out key.pem 2048 \
-   && openssl req -new -x509 -key key.pem -out cert.pem -days 1095 -subj "/C=US/ST=Washington/L=Seattle/O=Amazon/OU=Codebuild/CN=codebuild.amazon.com" \
-   && cat key.pem cert.pem >> /usr/local/etc/stunnel/stunnel.pem \
-   && cd .. ; rm -rf stunnel-5.55* \
-   && apt-get clean
 
 ENTRYPOINT ["dockerd-entrypoint.sh"]
